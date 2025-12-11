@@ -62,10 +62,9 @@ public final class App {
 
             tx.commit();
 
-
+            scanner.close();
         } catch (Exception e) {
             System.out.println("Error al crear la session: " + e.getMessage());
         }
-
     }
 }
