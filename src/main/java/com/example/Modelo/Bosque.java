@@ -1,5 +1,7 @@
 package com.example.Modelo;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +18,7 @@ public class Bosque {
     private String nombre;
     private int nivelPeligro;
     private Monstruo monstruoJefe;
+    private List<Monstruo> monstruosEnBosque; 
 
     public Bosque() {
     }
@@ -71,5 +74,10 @@ public class Bosque {
     public void cambiarMonstruoJefe(Monstruo monstruo){
         setMonstruoJefe(monstruo);
         System.out.println("Se cambio correctamente el monstruo jefe por: " + monstruo.getNombre());
+    }
+
+    public void addMonstruo(Monstruo monstruo){
+        monstruosEnBosque.add(monstruo);
+        System.out.println("Se añadio el monstruo correctamente al bosque");
     }
 }
