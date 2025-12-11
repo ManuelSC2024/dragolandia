@@ -22,8 +22,9 @@
         <property name="hibernate.format_sql">true</property>
        
         <!-- Registrar entidades -->
-        <mapping class="com.example.Libro"/>
-        <mapping class="com.example.Usuario"/>
+        <mapping class="com.example.Modelo.Bosque"/>
+        <mapping class="com.example.Modelo.Mago"/>
+        <mapping class="com.example.Modelo.Monstruo"/>
         
     </session-factory>
 </hibernate-configuration>
