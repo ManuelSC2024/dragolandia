@@ -3,6 +3,8 @@ package com.example.Modelo;
 import java.io.Serializable;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,25 +12,24 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Monstruos")
-public class Monstruo implements Serializable{
-    
+public class Monstruo implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String nombre;
     private int vida;
-    private String tipo;
-    private int fuerza;
 
-    // Añadir la lista de tipos al mostruo
-    // Añadir la lista de tipos al mostruo
-    // Añadir la lista de tipos al mostruo
+    @Enumerated(EnumType.STRING)
+    private TipoMonstruo tipo;
+
+    private int fuerza;
 
     public Monstruo() {
     }
 
-    public Monstruo(String nombre, int vida, String tipo, int fuerza) {
+    public Monstruo(String nombre, int vida, TipoMonstruo tipo, int fuerza) {
         this.nombre = nombre;
         this.vida = vida;
         this.tipo = tipo;
@@ -59,11 +60,11 @@ public class Monstruo implements Serializable{
         this.vida = vida;
     }
 
-    public String getTipo() {
+    public TipoMonstruo getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoMonstruo tipo) {
         this.tipo = tipo;
     }
 
@@ -77,8 +78,12 @@ public class Monstruo implements Serializable{
 
     @Override
     public String toString() {
-        return "Monstruo [id=" + id + ", nombre=" + nombre + ", vida=" + vida + ", tipo=" + tipo + ", fuerza=" + fuerza
-                + "]";
+        return "Monstruo [\nid=" + id
+                + ",\n nombre=" + nombre
+                + ",\n vida=" + vida
+                + ",\n tipo=" + tipo
+                + ",\n fuerza=" + fuerza
+                + "\n]";
     }
 
     public void atacar(Mago mago) {
@@ -90,4 +95,5 @@ public class Monstruo implements Serializable{
         System.out.println(
                 "El monstruo quito " + this.getFuerza() + " puntos de vida al mago: " + mago.getNombre());
     }
+
 }

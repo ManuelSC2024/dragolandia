@@ -19,12 +19,12 @@ public class Bosque {
 
     private String nombre;
     private int nivelPeligro;
-    
+
     @OneToOne
     private Monstruo monstruoJefe;
 
     @OneToMany
-    private List<Monstruo> monstruosEnBosque; 
+    private List<Monstruo> monstruosEnBosque;
 
     public Bosque() {
     }
@@ -69,20 +69,36 @@ public class Bosque {
 
     @Override
     public String toString() {
-        return "Bosque [id=" + id + ", nombre=" + nombre + ", nivelPeligro=" + nivelPeligro + ", monstruoJefe="
-                + monstruoJefe + "]";
+        return "Bosque [\nid=" + id
+                + ",\n nombre=" + nombre
+                + ",\n nivelPeligro=" + nivelPeligro
+                + ",\n monstruoJefe=" + monstruoJefe
+                + "\n]";
     }
 
-    public void mostrarJefe(){
+    /**
+     * Mostra el mosntruo jefe.
+     */
+    public void mostrarJefe() {
         System.err.println(this.monstruoJefe.toString());
     }
 
-    public void cambiarMonstruoJefe(Monstruo monstruo){
+    /**
+     * Cambia el monstruo jefe del bosque
+     * 
+     * @param monstruo Nuevo monstruo jefe
+     */
+    public void cambiarMonstruoJefe(Monstruo monstruo) {
         setMonstruoJefe(monstruo);
         System.out.println("Se cambio correctamente el monstruo jefe por: " + monstruo.getNombre());
     }
 
-    public void addMonstruo(Monstruo monstruo){
+    /**
+     * Añade un nuevo mosntruo al bosque
+     * 
+     * @param monstruo Monstruo nuevo en el bosque
+     */
+    public void addMonstruo(Monstruo monstruo) {
         monstruosEnBosque.add(monstruo);
         System.out.println("Se añadio el monstruo correctamente al bosque");
     }

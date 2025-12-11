@@ -61,7 +61,11 @@ public class Mago {
 
     @Override
     public String toString() {
-        return "Mago [id=" + id + ", nombre=" + nombre + ", vida=" + vida + ", nivelMagia=" + nivelMagia + "]";
+        return "Mago [\nid=" + id
+                + ",\n nombre=" + nombre
+                + ",\n vida=" + vida
+                + ",\n nivelMagia="+ nivelMagia
+                + "\n]";
     }
 
     public void lanzarHechizo(Monstruo monstruo) {
