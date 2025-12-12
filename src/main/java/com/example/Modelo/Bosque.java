@@ -2,6 +2,7 @@ package com.example.Modelo;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,10 +21,10 @@ public class Bosque {
     private String nombre;
     private int nivelPeligro;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Monstruo monstruoJefe;
 
-    @OneToMany
+    @OneToMany(targetEntity = Monstruo.class)
     private List<Monstruo> monstruosEnBosque;
 
     public Bosque() {

@@ -7,5 +7,14 @@ Ogro del Bosque
 Ogro
 10
 
+Espectro
+125
+ESPECTRO
+4
+
 Bosque del Ogro
 10
+
+Dragon Rojo
+25
+300

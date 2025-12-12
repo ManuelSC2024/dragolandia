@@ -15,7 +15,9 @@ import com.example.Modelo.TipoMonstruo;
 
 public class ControladorDragolandia {
 
-    Session session = null;
+    private Session session = null;
+
+    private static SessionFactory factory = new Configuration().configure().buildSessionFactory();
 
     /**
      * Metodo para crear un mago y añadrilo a la base de datos
@@ -25,7 +27,7 @@ public class ControladorDragolandia {
      * @param nivelMagia Nivel del mago.
      */
     public void addMago(String nombre, int vida, int nivelMagia) {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
+        try {
             session = factory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
@@ -34,7 +36,7 @@ public class ControladorDragolandia {
             session.persist(mago);
             tx.commit();
         } catch (Exception e) {
-            System.out.println("Error al crear la session: " + e.getMessage());
+            System.out.println("Error al añadir un Mago: " + e.getMessage());
         }
     }
 
@@ -47,7 +49,7 @@ public class ControladorDragolandia {
      * @param fuerza Puntos de fuerza del monstruo
      */
     public void addMonstruo(String nombre, int vida, TipoMonstruo tipo, int fuerza) {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
+        try {
             session = factory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
@@ -56,18 +58,19 @@ public class ControladorDragolandia {
             session.persist(monstruo);
             tx.commit();
         } catch (Exception e) {
-            System.out.println("Error al crear la session: " + e.getMessage());
+            System.out.println("Error al añadir un Monstruo: " + e.getMessage());
         }
     }
 
     /**
      * Metodo para crear un dragón y añadirlo a la base de datos
-     * @param nombre  Nombre del dragón
+     * 
+     * @param nombre          Nombre del dragón
      * @param intensidadFuego Intensidad del fuego del dragon
-     * @param resistencia Puntos de vida del dragon
+     * @param resistencia     Puntos de vida del dragon
      */
     public void addDragon(String nombre, int intensidadFuego, int resistencia) {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
+        try {
             session = factory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
@@ -76,7 +79,7 @@ public class ControladorDragolandia {
             session.persist(dragon);
             tx.commit();
         } catch (Exception e) {
-            System.out.println("Error al crear la session: " + e.getMessage());
+            System.out.println("Error al añadir un Dragon: " + e.getMessage());
         }
     }
 
@@ -91,7 +94,7 @@ public class ControladorDragolandia {
         Monstruo monstruo = leerMonstruo(monstruoJefe);
         Bosque bosque = new Bosque(nombre, nivelPeligro, monstruo);
 
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
+        try {
             session = factory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
@@ -99,7 +102,7 @@ public class ControladorDragolandia {
             tx.commit();
             return bosque.getId();
         } catch (Exception e) {
-            System.out.println("Error al crear la session: " + e.getMessage());
+            System.out.println("Error al añadir un bosque: " + e.getMessage());
         }
         return -1;
     }
@@ -108,7 +111,7 @@ public class ControladorDragolandia {
      * Metodo para mostrar todos los MAgos que hay en la base de datos
      */
     public void mostrarMago() {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
+        try {
             session = factory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
@@ -118,7 +121,7 @@ public class ControladorDragolandia {
             }
             session.close();
         } catch (Exception e) {
-            System.out.println("Error al crear la session: " + e.getMessage());
+            System.out.println("Error al mostrar todos los Magos: " + e.getMessage());
         }
     }
 
@@ -126,7 +129,7 @@ public class ControladorDragolandia {
      * Metodo para mostrar todos los Monstruos que hay en la base de datos
      */
     public void mostrarMonstruos() {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
+        try {
             session = factory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
@@ -136,7 +139,25 @@ public class ControladorDragolandia {
             }
             session.close();
         } catch (Exception e) {
-            System.out.println("Error al crear la session: " + e.getMessage());
+            System.out.println("Error al mostrar todos los Monstruos: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Metodo para mostrar todos los Dragones que hay en la base de datos
+     */
+    public void mostrarDragones() {
+        try {
+            session = factory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
+
+            List<Dragon> lista = session.createQuery("From Dragon", Dragon.class).getResultList();
+            for (Dragon dragon : lista) {
+                System.out.println(dragon.toString());
+            }
+            session.close();
+        } catch (Exception e) {
+            System.out.println("Error al mostrar todos los Dragones: " + e.getMessage());
         }
     }
 
@@ -144,8 +165,9 @@ public class ControladorDragolandia {
      * Metodo para mostrar todos los Bosques que hay en la base de datos
      */
     public void mostrarBosques() {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
+        try {
             session = factory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
 
             List<Bosque> lista = session.createQuery("From Bosque", Bosque.class).getResultList();
             for (Bosque Bosque : lista) {
@@ -153,7 +175,7 @@ public class ControladorDragolandia {
             }
             session.close();
         } catch (Exception e) {
-            System.out.println("Error al crear la session: " + e.getMessage());
+            System.out.println("Error al mostrar todos los Bosques: " + e.getMessage());
         }
     }
 
@@ -164,15 +186,15 @@ public class ControladorDragolandia {
      * @return debuelve un objeto de tipo Bosque
      */
     public Bosque leerBosque(int idBosque) {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
+        try {
             session = factory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
 
             Bosque bosque = session.get(Bosque.class, idBosque);
             session.close();
-
             return bosque;
         } catch (Exception e) {
-            System.out.println("Error al crear la session: " + e.getMessage());
+            System.out.println("Error al leer el bosque: " + e.getMessage());
         }
         return null;
     }
@@ -184,21 +206,23 @@ public class ControladorDragolandia {
      * @return debuelve un objeto de tipo Monstruo
      */
     public Monstruo leerMonstruo(int idMonstruo) {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
+        try {
             session = factory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
             Monstruo monstruo = session.get(Monstruo.class, idMonstruo);
             session.close();
+
             return monstruo;
         } catch (Exception e) {
-            System.out.println("Error al crear la session: " + e.getMessage());
+            System.out.println("Error al leer el monstruo: " + e.getMessage());
         }
         return null;
     }
 
     /**
      * Añade un Monstruo a un bosque
+     * 
      * @param idBosque   Id del bosque
      * @param idMonstruo Id del Monstruo
      */
@@ -206,18 +230,19 @@ public class ControladorDragolandia {
         Bosque bosque = leerBosque(idBosque);
         Monstruo monstruo = leerMonstruo(idMonstruo);
 
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
+        try {
             session = factory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
             if (bosque != null && monstruo != null) {
                 bosque.addMonstruo(monstruo);
+                //session.merge(bosque);
                 System.out.println("Se añadio el monstruo al bosque correctamente");
             } else
-                System.out.println("Error al añadir el monstruo al bosque");
+                System.out.println("\n Error al añadir el monstruo al bosque \n");
 
         } catch (Exception e) {
-            System.out.println("Error al crear la session: " + e.getMessage());
+            System.out.println("Error al añadir un monstruo al bosque: " + e.getMessage());
         }
     }
 }
