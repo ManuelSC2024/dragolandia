@@ -54,7 +54,7 @@ public class ControladorDragolandia {
             Transaction tx = session.beginTransaction();
 
             Monstruo monstruo = new Monstruo(nombre, vida, tipo, fuerza);
-            System.out.println("Se a creado corectamente el mago");
+            System.out.println("Se a creado corectamente el Monstruo");
             session.persist(monstruo);
             tx.commit();
         } catch (Exception e) {
@@ -90,21 +90,20 @@ public class ControladorDragolandia {
      * @param nivelPeligro Nivel de peligro del bosque
      * @param monstruoJefe Monstruo jefe del bosque
      */
-    public int addBosque(String nombre, int nivelPeligro, int monstruoJefe) {
-        Monstruo monstruo = leerMonstruo(monstruoJefe);
-        Bosque bosque = new Bosque(nombre, nivelPeligro, monstruo);
-
+    public void addBosque(String nombre, int nivelPeligro, int monstruoJefe) {
         try {
             session = factory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
+            Monstruo monstruo = session.get(Monstruo.class, monstruoJefe);
+            Bosque bosque = new Bosque(nombre, nivelPeligro, monstruo);
+
             session.persist(bosque);
             tx.commit();
-            return bosque.getId();
+            System.out.println("Se añadio el bosque correctamente");
         } catch (Exception e) {
             System.out.println("Error al añadir un bosque: " + e.getMessage());
         }
-        return -1;
     }
 
     /**
@@ -180,67 +179,25 @@ public class ControladorDragolandia {
     }
 
     /**
-     * Metodo para recoger un Bosque de la base de datos apartir de su id
-     * 
-     * @param idBosque Id del Bosque
-     * @return debuelve un objeto de tipo Bosque
-     */
-    public Bosque leerBosque(int idBosque) {
+    * Añade un Monstruo a un bosque
+    * 
+    * @param idBosque   Id del bosque
+    * @param idMonstruo Id del Monstruo
+    */
+    public void addMonstruoBosque(int idBosque, int idMonstruo) {
         try {
             session = factory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
             Bosque bosque = session.get(Bosque.class, idBosque);
-            session.close();
-            return bosque;
-        } catch (Exception e) {
-            System.out.println("Error al leer el bosque: " + e.getMessage());
-        }
-        return null;
-    }
-
-    /**
-     * Metodo para recoger un Monstruo de la base de datos apartir de su id
-     * 
-     * @param idMonstruo Id del Monstruo
-     * @return debuelve un objeto de tipo Monstruo
-     */
-    public Monstruo leerMonstruo(int idMonstruo) {
-        try {
-            session = factory.getCurrentSession();
-            Transaction tx = session.beginTransaction();
-
             Monstruo monstruo = session.get(Monstruo.class, idMonstruo);
-            session.close();
-
-            return monstruo;
-        } catch (Exception e) {
-            System.out.println("Error al leer el monstruo: " + e.getMessage());
-        }
-        return null;
-    }
-
-    /**
-     * Añade un Monstruo a un bosque
-     * 
-     * @param idBosque   Id del bosque
-     * @param idMonstruo Id del Monstruo
-     */
-    public void addMonstruoBosque(int idBosque, int idMonstruo) {
-        Bosque bosque = leerBosque(idBosque);
-        Monstruo monstruo = leerMonstruo(idMonstruo);
-
-        try {
-            session = factory.getCurrentSession();
-            Transaction tx = session.beginTransaction();
 
             if (bosque != null && monstruo != null) {
                 bosque.addMonstruo(monstruo);
-                //session.merge(bosque);
+                session.merge(bosque);
+                tx.commit();
                 System.out.println("Se añadio el monstruo al bosque correctamente");
-            } else
-                System.out.println("\n Error al añadir el monstruo al bosque \n");
-
+            }
         } catch (Exception e) {
             System.out.println("Error al añadir un monstruo al bosque: " + e.getMessage());
         }

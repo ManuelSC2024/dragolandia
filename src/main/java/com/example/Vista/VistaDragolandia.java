@@ -107,7 +107,6 @@ public class VistaDragolandia {
 
                     controlador.addMonstruoBosque(idBosque, idMonstruo);
                     break;
-
                 case 6:
                     System.out.println("Ingrese 1 para mostrar todos los Magos");
                     System.out.println("Ingrese 2 para mostrar todos los Mostruos");

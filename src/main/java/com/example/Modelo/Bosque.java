@@ -21,7 +21,7 @@ public class Bosque {
     private String nombre;
     private int nivelPeligro;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     private Monstruo monstruoJefe;
 
     @OneToMany(targetEntity = Monstruo.class)

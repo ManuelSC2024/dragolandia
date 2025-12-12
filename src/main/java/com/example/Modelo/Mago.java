@@ -1,5 +1,8 @@
 package com.example.Modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +20,8 @@ public class Mago {
     private String nombre;
     private int vida;
     private int nivelMagia;
+
+    private List<Hechizo> conjuros = new ArrayList<>();
 
     public Mago() {
     }
@@ -81,6 +86,10 @@ public class Mago {
             monstruo.setVida(0);
         System.out.println(
                 "El mago quito " + this.getNivelMagia() + " puntos de vida al monstruo: " + monstruo.getNombre());
+    }
+
+    public void addconjuro(Hechizo hechizo){
+        conjuros.add(hechizo);
     }
 
 }
