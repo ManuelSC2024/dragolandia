@@ -78,7 +78,7 @@ public class Monstruo implements Serializable {
 
     @Override
     public String toString() {
-        return "Monstruo [\nid=" + id
+        return "Monstruo [\n id=" + id
                 + ",\n nombre=" + nombre
                 + ",\n vida=" + vida
                 + ",\n tipo=" + tipo

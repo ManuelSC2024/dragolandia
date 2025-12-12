@@ -1,9 +1,11 @@
 Gandalf
 200
 20
+
 Ogro del Bosque
 250
 Ogro
-15
+10
+
 Bosque del Ogro
-15
+10

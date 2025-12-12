@@ -61,13 +61,18 @@ public class Mago {
 
     @Override
     public String toString() {
-        return "Mago [\nid=" + id
+        return "Mago [\n id=" + id
                 + ",\n nombre=" + nombre
                 + ",\n vida=" + vida
                 + ",\n nivelMagia="+ nivelMagia
                 + "\n]";
     }
 
+
+    /**
+     * Daño que hace el mago
+     * @param monstruo
+     */
     public void lanzarHechizo(Monstruo monstruo) {
         int vidaRestante = monstruo.getVida() - this.getNivelMagia();
         if (vidaRestante > 0) {

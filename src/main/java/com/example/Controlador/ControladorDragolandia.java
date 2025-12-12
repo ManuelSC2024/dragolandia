@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import com.example.Modelo.Bosque;
+import com.example.Modelo.Dragon;
 import com.example.Modelo.Mago;
 import com.example.Modelo.Monstruo;
 import com.example.Modelo.TipoMonstruo;
@@ -60,18 +61,40 @@ public class ControladorDragolandia {
     }
 
     /**
+     * Metodo para crear un dragón y añadirlo a la base de datos
+     * @param nombre  Nombre del dragón
+     * @param intensidadFuego Intensidad del fuego del dragon
+     * @param resistencia Puntos de vida del dragon
+     */
+    public void addDragon(String nombre, int intensidadFuego, int resistencia) {
+        try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
+            session = factory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
+
+            Dragon dragon = new Dragon(nombre, intensidadFuego, resistencia);
+            System.out.println("Se a creado corectamente el dragon");
+            session.persist(dragon);
+            tx.commit();
+        } catch (Exception e) {
+            System.out.println("Error al crear la session: " + e.getMessage());
+        }
+    }
+
+    /**
      * Metodo para crear un nuevo bosque y añadirlo a la base de datos
      * 
      * @param nombre       Nombre del boque
      * @param nivelPeligro Nivel de peligro del bosque
      * @param monstruoJefe Monstruo jefe del bosque
      */
-    public int addBosque(String nombre, int nivelPeligro, Monstruo monstruoJefe) {
+    public int addBosque(String nombre, int nivelPeligro, int monstruoJefe) {
+        Monstruo monstruo = leerMonstruo(monstruoJefe);
+        Bosque bosque = new Bosque(nombre, nivelPeligro, monstruo);
+
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
             session = factory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
-            Bosque bosque = new Bosque(nombre, nivelPeligro, monstruoJefe);
             session.persist(bosque);
             tx.commit();
             return bosque.getId();
@@ -81,66 +104,111 @@ public class ControladorDragolandia {
         return -1;
     }
 
-    public void mostrarMonstruos() {
+    /**
+     * Metodo para mostrar todos los MAgos que hay en la base de datos
+     */
+    public void mostrarMago() {
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
             session = factory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
 
-            List<Monstruo> lista = session.createQuery("From Monstruos", Monstruo.class).getResultList();
-            for (Monstruo monstruo : lista) {
-                System.out.println(monstruo.toString());
+            List<Mago> lista = session.createQuery("From Mago", Mago.class).getResultList();
+            for (Mago mago : lista) {
+                System.out.println(mago.toString());
             }
+            session.close();
         } catch (Exception e) {
             System.out.println("Error al crear la session: " + e.getMessage());
         }
     }
 
+    /**
+     * Metodo para mostrar todos los Monstruos que hay en la base de datos
+     */
+    public void mostrarMonstruos() {
+        try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
+            session = factory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
+
+            List<Monstruo> lista = session.createQuery("From Monstruo", Monstruo.class).getResultList();
+            for (Monstruo monstruo : lista) {
+                System.out.println(monstruo.toString());
+            }
+            session.close();
+        } catch (Exception e) {
+            System.out.println("Error al crear la session: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Metodo para mostrar todos los Bosques que hay en la base de datos
+     */
     public void mostrarBosques() {
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
             session = factory.getCurrentSession();
 
-            List<Bosque> lista = session.createQuery("From Bosques", Bosque.class).getResultList();
+            List<Bosque> lista = session.createQuery("From Bosque", Bosque.class).getResultList();
             for (Bosque Bosque : lista) {
                 System.out.println(Bosque.toString());
             }
+            session.close();
         } catch (Exception e) {
             System.out.println("Error al crear la session: " + e.getMessage());
         }
     }
 
+    /**
+     * Metodo para recoger un Bosque de la base de datos apartir de su id
+     * 
+     * @param idBosque Id del Bosque
+     * @return debuelve un objeto de tipo Bosque
+     */
     public Bosque leerBosque(int idBosque) {
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
             session = factory.getCurrentSession();
 
             Bosque bosque = session.get(Bosque.class, idBosque);
-            return bosque;
+            session.close();
 
+            return bosque;
         } catch (Exception e) {
             System.out.println("Error al crear la session: " + e.getMessage());
         }
         return null;
     }
 
+    /**
+     * Metodo para recoger un Monstruo de la base de datos apartir de su id
+     * 
+     * @param idMonstruo Id del Monstruo
+     * @return debuelve un objeto de tipo Monstruo
+     */
     public Monstruo leerMonstruo(int idMonstruo) {
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
             session = factory.getCurrentSession();
             Transaction tx = session.beginTransaction();
 
             Monstruo monstruo = session.get(Monstruo.class, idMonstruo);
+            session.close();
             return monstruo;
-
         } catch (Exception e) {
             System.out.println("Error al crear la session: " + e.getMessage());
         }
         return null;
     }
 
+    /**
+     * Añade un Monstruo a un bosque
+     * @param idBosque   Id del bosque
+     * @param idMonstruo Id del Monstruo
+     */
     public void addMonstruoBosque(int idBosque, int idMonstruo) {
+        Bosque bosque = leerBosque(idBosque);
+        Monstruo monstruo = leerMonstruo(idMonstruo);
+
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
             session = factory.getCurrentSession();
             Transaction tx = session.beginTransaction();
-
-            Bosque bosque = leerBosque(idBosque);
-            Monstruo monstruo = leerMonstruo(idMonstruo);
 
             if (bosque != null && monstruo != null) {
                 bosque.addMonstruo(monstruo);

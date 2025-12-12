@@ -69,7 +69,7 @@ public class Bosque {
 
     @Override
     public String toString() {
-        return "Bosque [\nid=" + id
+        return "Bosque [\n id=" + id
                 + ",\n nombre=" + nombre
                 + ",\n nivelPeligro=" + nivelPeligro
                 + ",\n monstruoJefe=" + monstruoJefe
