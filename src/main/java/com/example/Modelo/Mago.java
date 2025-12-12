@@ -69,9 +69,9 @@ public class Mago {
     }
 
 
-    /**
-     * Daño que hace el mago
-     * @param monstruo
+      /**
+     * Este metodo calcula el daño que causa el mago a un mostruo
+     * @param monstruo Monstruo que recibe daño
      */
     public void lanzarHechizo(Monstruo monstruo) {
         int vidaRestante = monstruo.getVida() - this.getNivelMagia();

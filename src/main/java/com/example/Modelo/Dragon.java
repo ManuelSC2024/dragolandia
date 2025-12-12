@@ -69,6 +69,10 @@ public class Dragon {
                 + "\n]";
     }
 
+    /**
+     * Este metodo calcula el daño que causa el dragon a un mostruo
+     * @param monstruo Monstruo que recibe daño
+     */
     public void exhalar(Monstruo monstruo) {
         int vidaRestante = monstruo.getVida() - this.getIntensidadFuego();
         if (vidaRestante > 0) {

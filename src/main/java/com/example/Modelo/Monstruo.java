@@ -86,6 +86,10 @@ public class Monstruo implements Serializable {
                 + "\n]";
     }
 
+      /**
+     * Este metodo calcula el daño que causa el monstruo a un mago
+     * @param mago Mago que recibe daño
+     */
     public void atacar(Mago mago) {
         int vidaRestante = mago.getVida() - this.fuerza;
         if (vidaRestante > 0) {
