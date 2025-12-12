@@ -13,8 +13,10 @@ public class BolaFuego extends Hechizo{
 
     @Override
     public void efecto(List<Monstruo> monstruos) {
+
+        //El numero de enemigos affectados es aleatorio
         for (Monstruo monstruo : monstruos) {
-            // Añadir daño del hechizo no el del mago
+            // Añadir daño del hechizo no el del mago 
         }
 
     }
