@@ -1,8 +1,10 @@
 package com.example.Vista;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.example.Controlador.ControladorDragolandia;
+import com.example.Modelo.Monstruo;
 import com.example.Modelo.TipoMonstruo;
 
 public class VistaDragolandia {
@@ -155,6 +157,7 @@ public class VistaDragolandia {
                     break;
 
                 case 7:
+                   
                     break;
 
                 case 8:

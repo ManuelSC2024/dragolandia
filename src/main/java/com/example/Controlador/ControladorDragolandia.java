@@ -12,6 +12,12 @@ import com.example.Modelo.Dragon;
 import com.example.Modelo.Mago;
 import com.example.Modelo.Monstruo;
 import com.example.Modelo.TipoMonstruo;
+import com.example.Modelo.Hechizos.BolaFuego;
+import com.example.Modelo.Hechizos.Rayo;
+import com.example.Modelo.Hechizos.BolaNieve;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ControladorDragolandia {
 
@@ -202,4 +208,137 @@ public class ControladorDragolandia {
             System.out.println("Error al añadir un monstruo al bosque: " + e.getMessage());
         }
     }
+
+    public List<Monstruo> obtenerMonstruosDelBosque(int idBosque, int max) {
+        try {
+            session = factory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
+
+            Bosque bosque = session.get(Bosque.class, idBosque);
+            if (bosque == null) {
+                System.out.println("Bosque no encontrado.");
+                session.close();
+                return Collections.emptyList();
+            }
+
+            List<Monstruo> monstruos = bosque.getMonstruosEnBosque();
+            if (monstruos == null || monstruos.isEmpty()) {
+                System.out.println("El bosque seleccionado no tiene monstruos.");
+                session.close();
+                return Collections.emptyList();
+            }
+
+            int limite = Math.min(Math.max(1, max), monstruos.size());
+            List<Monstruo> seleccion = new ArrayList<>(monstruos.subList(0, limite));
+            tx.commit();
+            return seleccion;
+        } catch (Exception e) {
+            System.out.println("Error obteniendo monstruos del bosque: " + e.getMessage());
+            return Collections.emptyList();
+        }
+    }
+
+    public void combatirMonstruo(int idMago, int idMonstruo, int hechizoOpcion) {
+        try {
+            session = factory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
+
+            Mago mago = session.get(Mago.class, idMago);
+            Monstruo monstruo = session.get(Monstruo.class, idMonstruo);
+            if (mago == null || monstruo == null) {
+                System.out.println("Mago o Monstruo no encontrado.");
+                session.close();
+                return;
+            }
+
+            BolaFuego bolaFuego = new BolaFuego();
+            Rayo rayo = new Rayo();
+            BolaNieve bolaNieve = new BolaNieve();
+
+            switch (hechizoOpcion) {
+                case 1:
+                    ArrayList<Monstruo> objetivos = new ArrayList<>();
+                    objetivos.add(monstruo);
+                    bolaFuego.efecto(objetivos, mago.getNivelMagia());
+                    System.out.println("El mago lanza Bola de Fuego (daño=" + mago.getNivelMagia() + ") → vida del monstruo: " + monstruo.getVida());
+                    break;
+
+                case 2:
+                    rayo.efecto(monstruo, mago.getNivelMagia());
+                    System.out.println("El mago lanza Rayo (daño=" + mago.getNivelMagia() + ") → vida del monstruo: " + monstruo.getVida());
+                    break;
+                case 3:
+                    bolaNieve.efecto(monstruo);
+                    System.out.println("El mago lanza Bola de Nieve → vida del monstruo: " + monstruo.getVida());
+                    break;
+            }
+
+            if (monstruo.getVida() > 0) {
+                monstruo.atacar(mago);
+                System.out.println("Contraataque de " + monstruo.getNombre() + " -> vida del mago: " + mago.getVida());
+            }
+
+            session.merge(monstruo);
+            session.merge(mago);
+            tx.commit();
+        } catch (Exception e) {
+            System.out.println("Error durante el combate: " + e.getMessage());
+        }
+    }
+
+    public void combatirJefe(int idMago, int idBosque, int hechizoOpcion) {
+        try {
+            session = factory.getCurrentSession();
+            Transaction tx = session.beginTransaction();
+
+            Mago mago = session.get(Mago.class, idMago);
+            Bosque bosque = session.get(Bosque.class, idBosque);
+            if (mago == null || bosque == null) {
+                System.out.println("Mago o Bosque no encontrado.");
+                session.close();
+                return;
+            }
+
+            Monstruo jefe = bosque.getMonstruoJefe();
+            if (jefe == null) {
+                System.out.println("El bosque no tiene jefe definido.");
+                session.close();
+                return;
+            }
+
+            BolaFuego bolaFuego = new BolaFuego();
+            Rayo rayo = new Rayo();
+            BolaNieve bolaNieve = new BolaNieve();
+
+            switch (hechizoOpcion) {
+                case 1:
+                    ArrayList<Monstruo> objetivos = new ArrayList<>();
+                    objetivos.add(jefe);
+                    bolaFuego.efecto(objetivos, mago.getNivelMagia());
+                    System.out.println("Bola de Fuego (daño=" + mago.getNivelMagia() + ") → vida del jefe: " + jefe.getVida());
+                    break;
+                case 2:
+                    rayo.efecto(jefe, mago.getNivelMagia());
+                    System.out.println("Rayo (daño=" + mago.getNivelMagia() + ") → vida del jefe: " + jefe.getVida());
+                    break;
+                case 3:
+                    bolaNieve.efecto(jefe);
+                    System.out.println("Bola de Nieve → vida del jefe: " + jefe.getVida());
+                    break;
+            }
+
+            if (jefe.getVida() > 0) {
+                jefe.atacar(mago);
+                System.out.println("Contraataque del jefe → vida del mago: " + mago.getVida());
+            }
+
+            session.merge(jefe);
+            session.merge(mago);
+            tx.commit();
+        } catch (Exception e) {
+            System.out.println("Error en el enfrentamiento con el jefe: " + e.getMessage());
+        }
+    }
+
+
 }

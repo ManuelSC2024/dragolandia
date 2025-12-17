@@ -1,6 +1,7 @@
 package com.example.Modelo;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -25,7 +26,7 @@ public class Bosque {
     private Monstruo monstruoJefe;
 
     @OneToMany(targetEntity = Monstruo.class)
-    private List<Monstruo> monstruosEnBosque;
+    private List<Monstruo> monstruosEnBosque = new ArrayList<>();
 
     public Bosque() {
     }
@@ -68,6 +69,14 @@ public class Bosque {
         this.monstruoJefe = monstruoJefe;
     }
 
+    public List<Monstruo> getMonstruosEnBosque() {
+        return monstruosEnBosque;
+    }
+
+    public void setMonstruosEnBosque(List<Monstruo> monstruosEnBosque) {
+        this.monstruosEnBosque = monstruosEnBosque;
+    }
+
     @Override
     public String toString() {
         return "Bosque [\n id=" + id
@@ -100,6 +109,9 @@ public class Bosque {
      * @param monstruo Monstruo nuevo en el bosque
      */
     public void addMonstruo(Monstruo monstruo) {
+        if (monstruosEnBosque == null) {
+            monstruosEnBosque = new ArrayList<>();
+        }
         monstruosEnBosque.add(monstruo);
         System.out.println("Se añadio el monstruo correctamente al bosque");
     }
