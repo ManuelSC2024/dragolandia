@@ -191,4 +191,7 @@ public class ControladorDragolandia {
         }
     }
 
+    public void jugar(int idMagoJuego, int idBosqueJuego){
+        System.out.println("Sin implementar");
+    }
 }

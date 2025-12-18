@@ -10,13 +10,20 @@ public class VistaDragolandia {
 
     public VistaDragolandia() {
 
+
+        controlador.addMago("Gandalf", 200, 20);
+        controlador.addMonstruo("Ogro del Bosque", 250, TipoMonstruo.valueOf("OGRO"), 10);
+        controlador.addMonstruo("Ogro del Bosque", 250, TipoMonstruo.valueOf("ESPECTRO"), 10);
+        controlador.addDragon("Dragon Rojo", 25, 300);
+        controlador.addBosque("Bosque del Ogro", 10, 1, 1);
+
         System.out.println("=== Menu ===");
         System.out.println("Ingrese 1 para añadir un mago");
         System.out.println("Ingrese 2 para añadir un monstruo");
         System.out.println("Ingrese 3 para añadir un dragón");
         System.out.println("Ingrese 4 para añadir un bosque");
 
-        System.out.println("Ingrese 5 para un hechizo a un Mago");
+        System.out.println("Ingrese 5 para añadir un hechizo a un Mago");
         System.out.println("Ingrese 6 para añadir montruos a un bosque");
         System.out.println("Ingresa 7 para ver las entidades");
         System.out.println("Ingrese 8 para jugar");
@@ -28,11 +35,6 @@ public class VistaDragolandia {
         Scanner scanner = new Scanner(System.in);
         int entrada = Integer.parseInt(scanner.nextLine());
 
-        controlador.addMago("Gandalf", 200, 20);
-        controlador.addMonstruo("Ogro del Bosque", 250, TipoMonstruo.valueOf("OGRO"), 10);
-        controlador.addMonstruo("Ogro del Bosque", 250, TipoMonstruo.valueOf("ESPECTRO"), 10);
-        controlador.addDragon("Dragon Rojo", 25, 300);
-        controlador.addBosque("Bosque del Ogro", 10, 1, 1);
 
         while (entrada != 10) {
 
@@ -127,8 +129,6 @@ public class VistaDragolandia {
                     controlador.addMonstruoBosque(idBosque, idMonstruo);
                     break;
 
-
-
                 case 7:
                     System.out.println("Ingrese 1 para mostrar todos los Magos");
                     System.out.println("Ingrese 2 para mostrar todos los Mostruos");
@@ -182,7 +182,20 @@ public class VistaDragolandia {
                     break;
 
                 case 8:
-                   
+                    controlador.mostrarMago();
+                    System.out.println("Ingrese la id del mago con el que desea jugar");
+                    System.out.print("id del Mago: ");
+
+                    int idMagoJuego = Integer.parseInt(scanner.nextLine());
+
+                    controlador.mostrarBosques();
+                    System.out.println("Ingrese la id del bosque al que desea ir");
+                    System.out.print("id del bosque: ");
+
+                    int idBosqueJuego = Integer.parseInt(scanner.nextLine());
+
+                    controlador.jugar(idMagoJuego, idBosqueJuego);
+
                     break;
 
                 case 9:
@@ -197,18 +210,18 @@ public class VistaDragolandia {
             System.out.println("=== Menu ===");
             System.out.println("Ingrese 1 para añadir un mago");
             System.out.println("Ingrese 2 para añadir un monstruo");
-            System.out.println("Ingrese 3 para añadir un bosque");
-            System.out.println("Ingrese 4 para añadir un dragón");
+            System.out.println("Ingrese 3 para añadir un dragón");
+            System.out.println("Ingrese 4 para añadir un bosque");
 
-            System.out.println("Ingrese 5 para un hechizo a un Mago");
+            System.out.println("Ingrese 5 para añadir un hechizo a un Mago");
             System.out.println("Ingrese 6 para añadir montruos a un bosque");
-            System.out.println("Ingrese 7 para añadir un Dragon a un bosque");
-            System.out.println("Ingresa 8 para ver las entidades");
-            System.out.println("Ingrese 9 para jugar");
+            System.out.println("Ingresa 7 para ver las entidades");
+            System.out.println("Ingrese 8 para jugar");
 
-            System.out.println("Ingrese 10 para salir");
+            System.out.println("Ingrese 9 para salir");
 
             System.out.print("Entrada: ");
+
             entrada = Integer.parseInt(scanner.nextLine()); // <-- Mover lectura aquí
         }
         scanner.close();

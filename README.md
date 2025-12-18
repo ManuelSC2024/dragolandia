@@ -68,7 +68,6 @@ direction TB
     <<Enumeration>> tipo
 
 
-
 ## Diseño
 
 #### Diagrama entidad relacion
