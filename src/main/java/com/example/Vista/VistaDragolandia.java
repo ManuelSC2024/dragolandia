@@ -1,10 +1,8 @@
 package com.example.Vista;
 
-import java.util.List;
 import java.util.Scanner;
 
 import com.example.Controlador.ControladorDragolandia;
-import com.example.Modelo.Monstruo;
 import com.example.Modelo.TipoMonstruo;
 
 public class VistaDragolandia {
@@ -15,19 +13,28 @@ public class VistaDragolandia {
         System.out.println("=== Menu ===");
         System.out.println("Ingrese 1 para añadir un mago");
         System.out.println("Ingrese 2 para añadir un monstruo");
-        System.out.println("Ingrese 3 para añadir un bosque");
-        System.out.println("Ingrese 4 para añadir un dragón");
-        System.out.println("Ingrese 5 para añadir montruos a un bosque");
-        System.out.println("Ingresa 6 para ver las entidades");
-        System.out.println("Ingrese 7 para jugar");
-        System.out.println("Ingrese 8 para salir");
+        System.out.println("Ingrese 3 para añadir un dragón");
+        System.out.println("Ingrese 4 para añadir un bosque");
+
+        System.out.println("Ingrese 5 para un hechizo a un Mago");
+        System.out.println("Ingrese 6 para añadir montruos a un bosque");
+        System.out.println("Ingresa 7 para ver las entidades");
+        System.out.println("Ingrese 8 para jugar");
+
+        System.out.println("Ingrese 9 para salir");
 
         System.out.print("Entrada: ");
 
         Scanner scanner = new Scanner(System.in);
         int entrada = Integer.parseInt(scanner.nextLine());
 
-        while (entrada != 8) {
+        controlador.addMago("Gandalf", 200, 20);
+        controlador.addMonstruo("Ogro del Bosque", 250, TipoMonstruo.valueOf("OGRO"), 10);
+        controlador.addMonstruo("Ogro del Bosque", 250, TipoMonstruo.valueOf("ESPECTRO"), 10);
+        controlador.addDragon("Dragon Rojo", 25, 300);
+        controlador.addBosque("Bosque del Ogro", 10, 1, 1);
+
+        while (entrada != 10) {
 
             switch (entrada) {
                 case 1:
@@ -63,24 +70,8 @@ public class VistaDragolandia {
                     controlador.addMonstruo(nombreMonstruo, vidaMonstruo, tipo, fuerza);
                     break;
 
+               
                 case 3:
-                    System.out.println("Se procedera a crear un nuevo Bosque");
-
-                    System.out.print("Ingrese el nombre del bosque: ");
-                    String nombreBosque = scanner.nextLine();
-
-                    System.out.print("Ingrese el nivel de peligro de bosque: ");
-                    int nivelDePeligro = Integer.parseInt(scanner.nextLine());
-
-                    controlador.mostrarMonstruos();
-
-                    System.out.print("Ingrese lel id del monstruo jefe: ");
-                    int idMonstruoJefe = Integer.parseInt(scanner.nextLine());
-
-                    controlador.addBosque(nombreBosque, nivelDePeligro, idMonstruoJefe);
-                    break;
-
-                case 4:
                     System.out.println("Se procedera a crear un nuevo dragon");
 
                     System.out.print("Ingrese el nombre del dragon: ");
@@ -95,7 +86,33 @@ public class VistaDragolandia {
                     controlador.addDragon(nombreDragon, intensidadFuego, resistencia);
                     break;
 
+                case 4:
+                    System.out.println("Se procedera a crear un nuevo Bosque");
+
+                    System.out.print("Ingrese el nombre del bosque: ");
+                    String nombreBosque = scanner.nextLine();
+
+                    System.out.print("Ingrese el nivel de peligro de bosque: ");
+                    int nivelDePeligro = Integer.parseInt(scanner.nextLine());
+
+                    controlador.mostrarMonstruos();
+
+                    System.out.print("Ingrese el id del monstruo jefe: ");
+                    int idMonstruoJefe = Integer.parseInt(scanner.nextLine());
+
+                    controlador.mostrarDragones();
+                    System.out.print("Ingrese el id del Dragon que habita el bosque: ");
+                    int idDragon = Integer.parseInt(scanner.nextLine());
+
+                    controlador.addBosque(nombreBosque, nivelDePeligro, idMonstruoJefe, idDragon);
+                    break;
+
+
                 case 5:
+
+                    break;
+
+                case 6:
                     controlador.mostrarBosques();
                     System.out.println("Ingrese el id del bosque al que desea añadir monstruos");
                     System.out.print("Id del bosque: ");
@@ -109,16 +126,20 @@ public class VistaDragolandia {
 
                     controlador.addMonstruoBosque(idBosque, idMonstruo);
                     break;
-                case 6:
+
+
+
+                case 7:
                     System.out.println("Ingrese 1 para mostrar todos los Magos");
                     System.out.println("Ingrese 2 para mostrar todos los Mostruos");
                     System.out.println("Ingrese 3 para mostrar todos los Dragones");
                     System.out.println("Ingrese 4 para mostrar todos los Bosques");
-                    System.out.println("Ingrese 5 para salir");
+                    System.out.println("Ingrese 5 para mostrar todos los Hechizos");
+                    System.out.println("Ingrese 6 para salir");
                     System.out.print("Entrada: ");
                     entrada = Integer.parseInt(scanner.nextLine());
 
-                    while (entrada != 5) {
+                    while (entrada != 6) {
                         switch (entrada) {
                             case 1:
                                 controlador.mostrarMago();
@@ -138,6 +159,10 @@ public class VistaDragolandia {
                                 break;
 
                             case 5:
+                                System.out.println("Sin Implementar");
+                                break;
+                            
+                            case 6:
                                 break;
 
                             default:
@@ -149,18 +174,18 @@ public class VistaDragolandia {
                         System.out.println("Ingrese 2 para mostrar todos los Mostruos");
                         System.out.println("Ingrese 3 para mostrar todos los Dragones");
                         System.out.println("Ingrese 4 para mostrar todos los Bosques");
-                        System.out.println("Ingrese 5 para salir");
-                        System.out.print("Entrada: ");
+                        System.out.println("Ingrese 5 para mostrar todos los Hechizos");
+                        System.out.println("Ingrese 6 para salir");
                         System.out.print("Entrada: ");
                         entrada = Integer.parseInt(scanner.nextLine());
                     }
                     break;
 
-                case 7:
+                case 8:
                    
                     break;
 
-                case 8:
+                case 9:
                     System.out.println("Saliendo del programa");
                     System.exit(0);
                     break;
@@ -174,15 +199,18 @@ public class VistaDragolandia {
             System.out.println("Ingrese 2 para añadir un monstruo");
             System.out.println("Ingrese 3 para añadir un bosque");
             System.out.println("Ingrese 4 para añadir un dragón");
-            System.out.println("Ingrese 5 para añadir montruos a un bosque");
-            System.out.println("Ingresa 6 para ver las entidades");
-            System.out.println("Ingrese 7 para jugar");
-            System.out.println("Ingrese 8 para salir");
+
+            System.out.println("Ingrese 5 para un hechizo a un Mago");
+            System.out.println("Ingrese 6 para añadir montruos a un bosque");
+            System.out.println("Ingrese 7 para añadir un Dragon a un bosque");
+            System.out.println("Ingresa 8 para ver las entidades");
+            System.out.println("Ingrese 9 para jugar");
+
+            System.out.println("Ingrese 10 para salir");
 
             System.out.print("Entrada: ");
             entrada = Integer.parseInt(scanner.nextLine()); // <-- Mover lectura aquí
         }
-
         scanner.close();
     }
 }

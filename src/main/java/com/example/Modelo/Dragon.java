@@ -13,11 +13,11 @@ public class Dragon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
-    String nombre;
-    int intensidadFuego;
-    int resistencia;
+    private String nombre;
+    private int intensidadFuego;
+    private int resistencia;
 
     public Dragon() {
     }

@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "Magos")
@@ -21,6 +22,7 @@ public class Mago {
     private int vida;
     private int nivelMagia;
 
+    @Transient
     private List<Hechizo> conjuros = new ArrayList<>();
 
     public Mago() {

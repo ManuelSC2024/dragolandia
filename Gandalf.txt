@@ -12,9 +12,10 @@ Espectro
 ESPECTRO
 4
 
-Bosque del Ogro
-10
-
 Dragon Rojo
 25
 300
+
+Bosque del Ogro
+10
+

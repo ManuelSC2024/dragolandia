@@ -28,13 +28,17 @@ public class Bosque {
     @OneToMany(targetEntity = Monstruo.class)
     private List<Monstruo> monstruosEnBosque = new ArrayList<>();
 
+    @OneToOne(cascade = CascadeType.MERGE)
+    private Dragon dragon;
+
     public Bosque() {
     }
 
-    public Bosque(String nombre, int nivelPeligro, Monstruo monstruoJefe) {
+    public Bosque(String nombre, int nivelPeligro, Monstruo monstruoJefe, Dragon dragon) {
         this.nombre = nombre;
         this.nivelPeligro = nivelPeligro;
         this.monstruoJefe = monstruoJefe;
+        this.dragon = dragon;
     }
 
     public int getId() {
@@ -75,6 +79,14 @@ public class Bosque {
 
     public void setMonstruosEnBosque(List<Monstruo> monstruosEnBosque) {
         this.monstruosEnBosque = monstruosEnBosque;
+    }
+
+    public Dragon getDragon() {
+        return dragon;
+    }
+
+    public void setDragon(Dragon dragon) {
+        this.dragon = dragon;
     }
 
     @Override
