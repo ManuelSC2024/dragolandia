@@ -10,7 +10,6 @@ public class VistaDragolandia {
 
     public VistaDragolandia() {
 
-
         controlador.addMago("Gandalf", 200, 20);
         controlador.addMonstruo("Ogro del Bosque", 250, TipoMonstruo.valueOf("OGRO"), 10);
         controlador.addMonstruo("Ogro del Bosque", 250, TipoMonstruo.valueOf("ESPECTRO"), 10);
@@ -26,15 +25,14 @@ public class VistaDragolandia {
         System.out.println("Ingrese 5 para añadir un hechizo a un Mago");
         System.out.println("Ingrese 6 para añadir montruos a un bosque");
         System.out.println("Ingresa 7 para ver las entidades");
-        System.out.println("Ingrese 8 para jugar");
-
-        System.out.println("Ingrese 9 para salir");
+        System.out.println("Ingrese 8 para modificar/eliminar entidades");
+        System.out.println("Ingrese 9 para jugar");
+        System.out.println("Ingrese 10 para salir");
 
         System.out.print("Entrada: ");
 
         Scanner scanner = new Scanner(System.in);
         int entrada = Integer.parseInt(scanner.nextLine());
-
 
         while (entrada != 10) {
 
@@ -72,7 +70,6 @@ public class VistaDragolandia {
                     controlador.addMonstruo(nombreMonstruo, vidaMonstruo, tipo, fuerza);
                     break;
 
-               
                 case 3:
                     System.out.println("Se procedera a crear un nuevo dragon");
 
@@ -108,7 +105,6 @@ public class VistaDragolandia {
 
                     controlador.addBosque(nombreBosque, nivelDePeligro, idMonstruoJefe, idDragon);
                     break;
-
 
                 case 5:
 
@@ -161,7 +157,7 @@ public class VistaDragolandia {
                             case 5:
                                 System.out.println("Sin Implementar");
                                 break;
-                            
+
                             case 6:
                                 break;
 
@@ -182,6 +178,140 @@ public class VistaDragolandia {
                     break;
 
                 case 8:
+                    System.out.println("=== Modificar o Eliminar ===");
+                    System.out.println("Ingrese 1 para Mago");
+                    System.out.println("Ingrese 2 para Monstruo");
+                    System.out.println("Ingrese 3 para Dragón");
+                    System.out.println("Ingrese 4 para Bosque");
+                    System.out.println("Ingrese 5 para salir");
+                    System.out.print("Entrada: ");
+                    entrada = Integer.parseInt(scanner.nextLine());
+
+                    while (entrada != 5) {
+
+                        System.out.println("Ingrese 1 para modificar");
+                        System.out.println("Ingrese 2 para borrar");
+                        System.out.println("Ingrese 3 para salir");
+                        System.out.print("Entrada: ");
+                        int accion = Integer.parseInt(scanner.nextLine());
+
+                        if (accion != 3) {
+                            switch (entrada) {
+
+                                case 1:
+                                    controlador.mostrarMago();
+
+                                    System.out.print("Id del mago: ");
+                                    int idMagoModificar = Integer.parseInt(scanner.nextLine());
+
+                                    if (accion == 1) {
+                                        System.out.print("Nuevo nombre: ");
+                                        String nuevoNombreMago = scanner.nextLine();
+
+                                        System.out.print("Nueva vida: ");
+                                        int nuevaVidaMago = Integer.parseInt(scanner.nextLine());
+
+                                        System.out.print("Nuevo nivel de magia: ");
+                                        int nuevoNivelMagia = Integer.parseInt(scanner.nextLine());
+
+                                        controlador.modificarMago(idMagoModificar, nuevoNombreMago, nuevaVidaMago, nuevoNivelMagia);
+                                    } else if (accion == 2) {
+                                        controlador.borrarMago(idMagoModificar);
+                                    }
+                                    break;
+
+                                case 2: 
+                                    controlador.mostrarMonstruos();
+
+                                    System.out.print("Id del monstruo: ");
+                                    int idMonstruoModificar = Integer.parseInt(scanner.nextLine());
+
+                                    if (accion == 1) {
+                                        System.out.print("Nuevo nombre: ");
+                                        String nuevoNombreMonstruo = scanner.nextLine();
+
+                                        System.out.print("Nueva vida: ");
+                                        int nuevaVidaMonstruo = Integer.parseInt(scanner.nextLine());
+
+                                        System.out.print("Nuevo tipo (OGRO, TROLL, ESPECTRO): ");
+                                        TipoMonstruo nuevoTipo = TipoMonstruo.valueOf(scanner.nextLine().toUpperCase());
+
+                                        System.out.print("Nueva fuerza: ");
+                                        int nuevaFuerza = Integer.parseInt(scanner.nextLine());
+
+                                        controlador.modificarMonstruo(idMonstruoModificar, nuevoNombreMonstruo,
+                                                nuevaVidaMonstruo, nuevoTipo, nuevaFuerza);
+                                    } else if (accion == 2) {
+                                        controlador.borrarMonstruo(idMonstruoModificar);
+                                    }
+                                    break;
+
+                                case 3: 
+                                    controlador.mostrarDragones();
+
+                                    System.out.print("Id del dragón: ");
+                                    int idDragonModificar = Integer.parseInt(scanner.nextLine());
+
+                                    if (accion == 1) {
+                                        System.out.print("Nuevo nombre: ");
+                                        String nuevoNombreDragon = scanner.nextLine();
+
+                                        System.out.print("Nueva intensidad de fuego: ");
+                                        int nuevaIntFuego = Integer.parseInt(scanner.nextLine());
+
+                                        System.out.print("Nueva resistencia: ");
+                                        int nuevaRes = Integer.parseInt(scanner.nextLine());
+
+                                        controlador.modificarDragon(idDragonModificar, nuevoNombreDragon, nuevaIntFuego, nuevaRes);
+                                    } else if (accion == 2) {
+                                        controlador.borrarDragon(idDragonModificar);
+                                    }
+                                    break;
+
+                                case 4: 
+                                    controlador.mostrarBosques();
+
+                                    System.out.print("Id del bosque: ");
+                                    int idBosqueModificar = Integer.parseInt(scanner.nextLine());
+
+                                    if (accion == 1) {
+                                        System.out.print("Nuevo nombre: ");
+                                        String nuevoNombreBosque = scanner.nextLine();
+
+                                        System.out.print("Nuevo nivel de peligro: ");
+                                        int nuevoNivel = Integer.parseInt(scanner.nextLine());
+
+                                        controlador.mostrarMonstruos();
+                                        System.out.print("Nuevo id de monstruo jefe: ");
+                                        int nuevoMonstruoJefe = Integer.parseInt(scanner.nextLine());
+
+                                        controlador.mostrarDragones();
+                                        System.out.print("Nuevo id de dragón: ");
+                                        int nuevoDragon = Integer.parseInt(scanner.nextLine());
+
+                                        controlador.modificarBosque(idBosqueModificar, nuevoNombreBosque, nuevoNivel, nuevoMonstruoJefe, nuevoDragon);
+                                    } else if (accion == 2) {
+                                        controlador.borrarBosque(idBosqueModificar);
+                                    }
+                                    break;
+                                    
+                                default:
+                                    System.out.println("Opción inválida");
+                            }
+                        } 
+
+                        System.out.println("\n=== Modificar/Eliminar Entidades ===");
+                        System.out.println("Ingrese 1 para Mago");
+                        System.out.println("Ingrese 2 para Monstruo");
+                        System.out.println("Ingrese 3 para Dragón");
+                        System.out.println("Ingrese 4 para Bosque");
+                        System.out.println("Ingrese 5 para salir");
+                        System.out.print("Entrada: ");
+                        entrada = Integer.parseInt(scanner.nextLine());
+                    }
+                    break;
+
+                case 9:
                     controlador.mostrarMago();
                     System.out.println("Ingrese la id del mago con el que desea jugar");
                     System.out.print("id del Mago: ");
@@ -198,7 +328,7 @@ public class VistaDragolandia {
 
                     break;
 
-                case 9:
+                case 10:
                     System.out.println("Saliendo del programa");
                     System.exit(0);
                     break;
@@ -216,9 +346,9 @@ public class VistaDragolandia {
             System.out.println("Ingrese 5 para añadir un hechizo a un Mago");
             System.out.println("Ingrese 6 para añadir montruos a un bosque");
             System.out.println("Ingresa 7 para ver las entidades");
-            System.out.println("Ingrese 8 para jugar");
-
-            System.out.println("Ingrese 9 para salir");
+            System.out.println("Ingrese 8 para modificar/eliminar entidades");
+            System.out.println("Ingrese 9 para jugar");
+            System.out.println("Ingrese 10 para salir");
 
             System.out.print("Entrada: ");
 
