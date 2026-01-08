@@ -2,7 +2,9 @@ package com.example.Controlador;
 
 import java.util.List;
 
+import com.example.Modelo.Hechizo;
 import com.example.Modelo.Mago;
+import com.example.Modelo.Hechizos.Rayo;
 
 import jakarta.persistence.EntityManager;
 
@@ -94,6 +96,21 @@ public class ControladorMago {
             }
         } catch (Exception e) {
             System.out.println("Error al eliminar un Mago: " + e.getMessage());
+        }
+    }
+
+    public void addHechizo(int id, String nombreHechizo){
+        try{
+            em.getTransaction().begin();
+            Mago mago = em.find(Mago.class, 1);
+            switch (nombreHechizo) {
+                case :
+                    
+                    break;
+            
+                default:
+                    break;
+            }
         }
     }
 }

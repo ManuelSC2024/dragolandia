@@ -38,4 +38,8 @@ public class Hechizo {
      * @param monstruo Revice un monstruo
      */
     public void efecto(Monstruo monstruo){}
+
+    public String getNombre() {
+        return nombre;
+    }
 }

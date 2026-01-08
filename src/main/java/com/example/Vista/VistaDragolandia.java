@@ -11,8 +11,13 @@ public class VistaDragolandia {
     public VistaDragolandia() {
 
         controlador.addMago("Gandalf", 200, 20);
+        controlador.addMago("Merlín", 125, 10);
+        
+
         controlador.addMonstruo("Ogro del Bosque", 250, TipoMonstruo.valueOf("OGRO"), 10);
-        controlador.addMonstruo("Ogro del Bosque", 250, TipoMonstruo.valueOf("ESPECTRO"), 10);
+        controlador.addMonstruo("Espectro", 250, TipoMonstruo.valueOf("ESPECTRO"), 10);
+        controlador.addMonstruo("Ogro pequeño", 0, TipoMonstruo.valueOf("OGRO"), 0);
+
         controlador.addDragon("Dragon Rojo", 25, 300);
         controlador.addBosque("Bosque del Ogro", 10, 1, 1);
 
@@ -107,7 +112,7 @@ public class VistaDragolandia {
                     break;
 
                 case 5:
-
+                    
                     break;
 
                 case 6:

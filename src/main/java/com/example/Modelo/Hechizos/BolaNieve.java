@@ -13,4 +13,5 @@ public class BolaNieve extends Hechizo {
     public void efecto(Monstruo monstruo) {
         monstruo.setVida(0);
     }
+
 }
