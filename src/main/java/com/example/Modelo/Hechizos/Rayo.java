@@ -9,6 +9,9 @@ public class Rayo extends Hechizo{
         this.nombre = "Rayo";
     }
 
+    /**
+     * 
+     */
     @Override
     public void efecto(Monstruo monstruos, int danho){
        monstruos.setVida(monstruos.getVida() - danho);

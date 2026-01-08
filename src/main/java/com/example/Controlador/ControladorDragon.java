@@ -2,18 +2,16 @@ package com.example.Controlador;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-
 import com.example.Modelo.Dragon;
+
+import jakarta.persistence.EntityManager;
 
 public class ControladorDragon {
 
-    private SessionFactory factory;
+    private EntityManager em;
 
-    public ControladorDragon(SessionFactory factory) {
-        this.factory = factory;
+    public ControladorDragon(EntityManager em) {
+        this.em = em;
     }
 
     /**
@@ -24,13 +22,13 @@ public class ControladorDragon {
      * @param resistencia     Puntos de vida del dragon
      */
     public void addDragon(String nombre, int intensidadFuego, int resistencia) {
-        try (Session session = factory.getCurrentSession()) {
-            Transaction tx = session.beginTransaction();
+        try {
+            em.getTransaction().begin();
 
             Dragon dragon = new Dragon(nombre, intensidadFuego, resistencia);
             System.out.println("Se a creado corectamente el dragon");
-            session.persist(dragon);
-            tx.commit();
+            em.persist(dragon);
+            em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error al añadir un Dragon: " + e.getMessage());
         }
@@ -40,10 +38,10 @@ public class ControladorDragon {
      * Metodo para mostrar todos los Dragones que hay en la base de datos
      */
     public void mostrarDragones() {
-        try (Session session = factory.getCurrentSession()) {
-            Transaction tx = session.beginTransaction();
+        try {
+            em.getTransaction().begin();
 
-            List<Dragon> lista = session.createQuery("From Dragon", Dragon.class).getResultList();
+            List<Dragon> lista = em.createQuery("From Dragon", Dragon.class).getResultList();
             for (Dragon dragon : lista) {
                 System.out.println(dragon.toString());
             }
@@ -56,18 +54,18 @@ public class ControladorDragon {
      * Modifica los datos de un dragón existente
      */
     public void modificarDragon(int id, String nombre, int intensidadFuego, int resistencia) {
-        try (Session session = factory.getCurrentSession()) {
-            Transaction tx = session.beginTransaction();
+        try {
+            em.getTransaction().begin();
 
-            Dragon dragon = session.get(Dragon.class, id);
+            Dragon dragon = em.find(Dragon.class, id);
            
             if (dragon != null) {
                 dragon.setNombre(nombre);
                 dragon.setIntensidadFuego(intensidadFuego);
                 dragon.setResistencia(resistencia);
                
-                session.merge(dragon);
-                tx.commit();
+                em.merge(dragon);
+                em.getTransaction().commit();
                 System.out.println("Se modificó correctamente el dragón con id: " + id);
             } else {
                 System.out.println("No se encontró el dragón con id: " + id);
@@ -81,13 +79,13 @@ public class ControladorDragon {
      * Elimina un dragón por id
      */
     public void borrarDragon(int id) {
-        try (Session session = factory.getCurrentSession()) {
-            Transaction tx = session.beginTransaction();
+        try {
+            em.getTransaction().begin();
 
-            Dragon dragon = session.get(Dragon.class, id);
+            Dragon dragon = em.find(Dragon.class, id);
             if (dragon != null) {
-                session.remove(dragon);
-                tx.commit();
+                em.remove(dragon);
+                em.getTransaction().commit();
                 System.out.println("Se eliminó correctamente el dragón con id: " + id);
             } else {
                 System.out.println("No se encontró el dragón con id: " + id);

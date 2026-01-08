@@ -1,18 +1,21 @@
 package com.example.Controlador;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import com.example.Modelo.TipoMonstruo;
+import com.example.Util.HibernateUtil;
+
+import jakarta.persistence.EntityManager;
 
 public class ControladorDragolandia {
 
-    private static SessionFactory factory = new Configuration().configure().buildSessionFactory();
     
-    private ControladorMago controladorMago = new ControladorMago(factory);
-    private ControladorMonstruo controladorMonstruo = new ControladorMonstruo(factory);
-    private ControladorDragon controladorDragon = new ControladorDragon(factory);
-    private ControladorBosque controladorBosque = new ControladorBosque(factory);
+    private static EntityManager entityManager = HibernateUtil.getEntityManager();
+
+
+    private ControladorMago controladorMago = new ControladorMago(entityManager);
+    private ControladorMonstruo controladorMonstruo = new ControladorMonstruo(entityManager);
+    private ControladorDragon controladorDragon = new ControladorDragon(entityManager);
+    private ControladorBosque controladorBosque = new ControladorBosque(entityManager);
 
     // Añadir Entidades
     /**
@@ -49,6 +52,7 @@ public class ControladorDragolandia {
     public void addMonstruoBosque(int idBosque, int idMonstruo) {
         controladorBosque.addMonstruoBosque(idBosque, idMonstruo);
     }
+
 
 
     // Mostrar Entidades
@@ -97,23 +101,43 @@ public class ControladorDragolandia {
         controladorBosque.modificarBosque(id, nombre, nivelPeligro, idMonstruoJefe, idDragon);
     }
 
+
+
     // Eliminar Entidades
+
+    /**
+     * Borra un mago apartir de su id
+     * @param id Id del Mago
+     */
     public void borrarMago(int id) {
         controladorMago.borrarMago(id);
     }
 
+     /**
+     * Borra un Monstruo apartir de su id
+     * @param id Id del Monstruo
+     */
     public void borrarMonstruo(int id) {
         controladorMonstruo.borrarMonstruo(id);
     }
 
+     /**
+     * Borra un Dragon apartir de su id
+     * @param id Id del Dragon
+     */
     public void borrarDragon(int id) {
         controladorDragon.borrarDragon(id);
     }
 
+     /**
+     * Borra un Bosque apartir de su id
+     * @param id Id del Bosque
+     */
     public void borrarBosque(int id) {
         controladorBosque.borrarBosque(id);
     }
 
+    //Jugar
     public void jugar(int idMagoJuego, int idBosqueJuego){
         System.out.println("Sin implementar");
     }

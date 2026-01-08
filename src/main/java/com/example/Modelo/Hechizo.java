@@ -19,9 +19,23 @@ public class Hechizo {
 
     protected String nombre;
 
+    /**
+     * Recive una lista de monstruos y les hace daño daño a partir del nivel de magia del mago.
+     * @param monstruos Recive una lista de monstruos
+     * @param danho Recive el daño del Mago (nivel de magia)
+     */
     public void efecto(List<Monstruo> monstruos, int danho){}
     
+    /**
+     * Recive un monstruo y le hace daño a partir del nivel de magia del mago
+     * @param monstruo Revice un monstruo
+     * @param danho Revice el nivel de magia del mago
+     */
     public void efecto(Monstruo monstruo, int danho){}
 
+    /**
+     * Recive un monstruo y le reduce la vida a cero
+     * @param monstruo Revice un monstruo
+     */
     public void efecto(Monstruo monstruo){}
 }

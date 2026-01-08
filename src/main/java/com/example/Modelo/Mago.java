@@ -90,8 +90,39 @@ public class Mago {
                 "El mago quito " + this.getNivelMagia() + " puntos de vida al monstruo: " + monstruo.getNombre());
     }
 
+    public void lanzarHechizo(Monstruo monstruo, Hechizo hechizo){
+        if (conjuros.contains(hechizo)) {
+            switch (hechizo.nombre) {
+                case "Bola de fuego":
+                        List<Monstruo> monstruos = new ArrayList<>();
+                        monstruos.add(monstruo);
+                        hechizo.efecto(monstruos, id);
+                    break;
+
+                case "Bola de Nieve":
+                    hechizo.efecto(monstruo);
+                    break;
+
+                case "Rayo":
+                    hechizo.efecto(monstruo, this.nivelMagia);
+                    break;
+            
+                default:
+                    System.out.println("El hechizo no existe");
+                    break;
+            }
+        }else {
+            System.out.println("El mago no conoce el hechizo");
+            System.out.println("El mago pierde 1 punto de vida");
+            setVida(this.vida-1);
+        }
+    }
+
+    /**
+     * Añade un hechizo a la lista de conjuros aprendidos del mago
+     * @param hechizo Hechizo a aprender
+     */
     public void addconjuro(Hechizo hechizo){
         conjuros.add(hechizo);
     }
-
 }
