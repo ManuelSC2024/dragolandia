@@ -104,13 +104,16 @@ public class ControladorMago {
             em.getTransaction().begin();
             Mago mago = em.find(Mago.class, 1);
             switch (nombreHechizo) {
-                case :
-                    
+                case "Rayo":
+                    Rayo rayo = new Rayo();
+                    mago.addconjuro(rayo);
                     break;
             
                 default:
                     break;
             }
+        } catch (Exception e) {
+            // TODO: handle exception
         }
     }
 }
