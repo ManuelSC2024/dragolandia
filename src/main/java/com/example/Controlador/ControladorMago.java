@@ -28,7 +28,7 @@ public class ControladorMago {
             em.getTransaction().begin();
 
             Mago mago = new Mago(nombre, vida, nivelMagia);
-            System.out.println("Se a creado corectamente el mago");
+            System.out.println("Se a creado corectamente el Mago");
 
             em.persist(mago);
             em.getTransaction().commit();
@@ -113,7 +113,7 @@ public class ControladorMago {
             Mago mago = em.find(Mago.class, idmago);
             Hechizo hechizo = em.find(Hechizo.class, idHechizo);
             mago.addconjuro(hechizo);
-
+            System.out.println("Se añadio el hechizo al mago correctamente");
             em.merge(mago);
             em.getTransaction().commit();
         } catch (Exception e) {

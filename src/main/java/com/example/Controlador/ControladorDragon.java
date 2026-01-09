@@ -26,7 +26,7 @@ public class ControladorDragon {
             em.getTransaction().begin();
 
             Dragon dragon = new Dragon(nombre, intensidadFuego, resistencia);
-            System.out.println("Se a creado corectamente el dragon");
+            System.out.println("Se a creado corectamente el Dragon");
             em.persist(dragon);
             em.getTransaction().commit();
         } catch (Exception e) {

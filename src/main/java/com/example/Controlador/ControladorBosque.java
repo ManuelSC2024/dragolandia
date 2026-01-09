@@ -35,7 +35,7 @@ public class ControladorBosque {
 
             em.persist(bosque);
             em.getTransaction().commit();
-            System.out.println("Se añadio el bosque correctamente");
+            System.out.println("Se a creado corectamente el Bosque");
         } catch (Exception e) {
             System.out.println("Error al añadir un bosque: " + e.getMessage());
         }

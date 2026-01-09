@@ -33,7 +33,7 @@ public class VistaDragolandia {
 
         controlador.addMonstruo("Ogro del Bosque", 250, TipoMonstruo.valueOf("OGRO"), 10);
         controlador.addMonstruo("Espectro", 250, TipoMonstruo.valueOf("ESPECTRO"), 10);
-        controlador.addMonstruo("Ogro pequeño", 0, TipoMonstruo.valueOf("OGRO"), 0);
+        controlador.addMonstruo("Troll", 0, TipoMonstruo.valueOf("TROLL"), 0);
 
         controlador.addDragon("Dragon Rojo", 25, 300);
         controlador.addBosque("Bosque del Ogro", 10, 1, 1);
@@ -41,7 +41,7 @@ public class VistaDragolandia {
         controlador.addMonstruoBosque(1, 3);
 
 
-        System.out.println("=== Menu ===");
+        System.out.println("\n=== Menu ===");
         System.out.println("Ingrese 1 para añadir un mago");
         System.out.println("Ingrese 2 para añadir un monstruo");
         System.out.println("Ingrese 3 para añadir un dragón");
@@ -63,7 +63,7 @@ public class VistaDragolandia {
 
             switch (entrada) {
                 case 1:
-                    System.out.println("Se procedera a crear un nuevo Mago: ");
+                    System.out.println("\nSe procedera a crear un nuevo Mago: ");
 
                     System.out.print("Ingrese el nombre del mago: ");
                     String nombreMago = scanner.nextLine();
@@ -78,7 +78,7 @@ public class VistaDragolandia {
                     break;
 
                 case 2:
-                    System.out.println("Se procedera a crear un nuevo monstruo");
+                    System.out.println("\nSe procedera a crear un nuevo monstruo");
 
                     System.out.print("Ingrese el nombre del monstruo: ");
                     String nombreMonstruo = scanner.nextLine();
@@ -96,7 +96,7 @@ public class VistaDragolandia {
                     break;
 
                 case 3:
-                    System.out.println("Se procedera a crear un nuevo dragon");
+                    System.out.println("\nSe procedera a crear un nuevo dragon");
 
                     System.out.print("Ingrese el nombre del dragon: ");
                     String nombreDragon = scanner.nextLine();
@@ -111,7 +111,7 @@ public class VistaDragolandia {
                     break;
 
                 case 4:
-                    System.out.println("Se procedera a crear un nuevo Bosque");
+                    System.out.println("\nSe procedera a crear un nuevo Bosque");
 
                     System.out.print("Ingrese el nombre del bosque: ");
                     String nombreBosque = scanner.nextLine();
@@ -132,7 +132,7 @@ public class VistaDragolandia {
                     break;
 
                 case 5:
-                    System.out.println("Ingrese el id del hechizo que desea añadir al mago");
+                    System.out.println("\nIngrese el id del hechizo que desea añadir al mago");
                     System.out.println("Los conjuros disponibles son: ");
                     controlador.mostrarHechizos();
                     
@@ -148,8 +148,8 @@ public class VistaDragolandia {
                     break;
 
                 case 6:
+                    System.out.println("\nIngrese el id del bosque al que desea añadir monstruos");
                     controlador.mostrarBosques();
-                    System.out.println("Ingrese el id del bosque al que desea añadir monstruos");
                     System.out.print("Id del bosque: ");
                     int idBosque = Integer.parseInt(scanner.nextLine());
 
@@ -163,7 +163,7 @@ public class VistaDragolandia {
                     break;
 
                 case 7:
-                    System.out.println("Ingrese 1 para mostrar todos los Magos");
+                    System.out.println("\nIngrese 1 para mostrar todos los Magos");
                     System.out.println("Ingrese 2 para mostrar todos los Mostruos");
                     System.out.println("Ingrese 3 para mostrar todos los Dragones");
                     System.out.println("Ingrese 4 para mostrar todos los Bosques");
@@ -215,7 +215,7 @@ public class VistaDragolandia {
                     break;
 
                 case 8:
-                    System.out.println("=== Modificar o Eliminar ===");
+                    System.out.println("\n=== Modificar o Eliminar ===");
                     System.out.println("Ingrese 1 para Mago");
                     System.out.println("Ingrese 2 para Monstruo");
                     System.out.println("Ingrese 3 para Dragón");
@@ -349,8 +349,8 @@ public class VistaDragolandia {
                     break;
 
                 case 9:
+                    System.out.println("\nIngrese la id del mago con el que desea jugar");
                     controlador.mostrarMago();
-                    System.out.println("Ingrese la id del mago con el que desea jugar");
                     System.out.print("id del Mago: ");
 
                     int idMagoJuego = Integer.parseInt(scanner.nextLine());
@@ -371,10 +371,10 @@ public class VistaDragolandia {
                     break;
 
                 default:
-                    System.out.println("Opción inválida.");
+                    System.out.println("\nOpción inválida.");
             }
 
-            System.out.println("=== Menu ===");
+            System.out.println("\n=== Menu ===");
             System.out.println("Ingrese 1 para añadir un mago");
             System.out.println("Ingrese 2 para añadir un monstruo");
             System.out.println("Ingrese 3 para añadir un dragón");

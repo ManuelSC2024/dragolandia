@@ -122,6 +122,5 @@ public class Bosque {
             monstruosEnBosque = new ArrayList<>();
         }
         monstruosEnBosque.add(monstruo);
-        System.out.println("Se añadio el monstruo correctamente al bosque");
     }
 }
