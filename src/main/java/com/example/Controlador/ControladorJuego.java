@@ -44,6 +44,7 @@ public class ControladorJuego {
 
         Monstruo monstruoJefe = bosque.getMonstruoJefe();
         Monstruo monstruo = bosque.getMonstruosEnBosque().getFirst();
+        Monstruo monstruo2 = bosque.getMonstruosEnBosque().getLast();
         Dragon dragon = bosque.getDragon();
         int turno = 1;
         
@@ -116,6 +117,9 @@ public class ControladorJuego {
                 System.out.println("El " + monstruo.getNombre() + " a muerto");
                 System.out.println("El mago a ganado");
                 System.out.println(mago.getNombre() + " se quedo con " + mago.getVida() + " puntos de vida");
+
+                bosque.cambiarMonstruoJefe(monstruo2);
+                System.out.println("El nuevo monstruo jefe del bosque es: " + monstruo2.getNombre());
             }
         }
         System.out.println();

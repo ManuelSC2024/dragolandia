@@ -1,8 +1,22 @@
 # Dragolandia
 
 ## Introduccion
+Este esta es una aplicacion que permite añadir magos, dragones y monstruos para que combatan en un bosque
 
 ## Analisis
+Dragolandia esta diseñada siguiendo el patron modelo-vista-controlador
+El sistema te permite crear magos, monstruos, dragones y bosques para luego usarlo en una simulacion de combate
+
+A los magos puedes darles nombre, personalizar sus atributos y añadirles hechizos
+A los monstruos puedes darles nombre, escoger su tipo y personalizar sus atributos
+A los dragones puedes darles nombre y personalizar sus atributos
+A los bosques puedes darle nombre, escoger el mostruo jefe del bosque, seleccionar el dragon que habita en el bosque y añadir monstruos al bosque
+Puedes ver, modificar y eliminar las entidades
+Al jugar selecionas un mago y un bosque donde combatiras contra un monstruo y luego contra el jefe donde el dragon puede aparecer a ayudar.
+
+### Ampliación
+Se podria ampliar el juego permitiendo que el usuario cree sus propios hechizos y permitiendo al mago tener invocaciones que serian monstruos amistosos que el mago podria invocar en battala para que le ayuden
+
 
 ### Diagrama de clases
 
@@ -18,6 +32,8 @@ direction TB
     ControladorDragolandia --> ControladorMonstruo : usa
     ControladorDragolandia --> ControladorDragon : usa
     ControladorDragolandia --> ControladorBosque : usa
+    ControladorDragolandia --> ControladorHechizo : usa
+    ControladorDragolandia --> ControladorJuego : usa
 
     ControladorMago --> Mago : gestiona
     ControladorMonstruo --> Monstruo : gestiona
@@ -44,11 +60,14 @@ direction TB
     }
 
     class ControladorDragolandia{
+        -EntityManager entityManager
         -ControladorMago controladorMago
         -ControladorMonstruo controladorMonstruo
         -ControladorDragon controladorDragon
         -ControladorBosque controladorBosque
         +addMago(String, int, int)
+        +addHechizoMago(int, int)
+        +addHechizo(Hechizo)
         +addMonstruo(String, int, TipoMonstruo, int)
         +addDragon(String, int, int)
         +addBosque(String, int, int, int)
@@ -69,15 +88,16 @@ direction TB
     }
 
     class ControladorMago{
-        -SessionFactory factory
+        -EntityManager entityManager
         +addMago(String, int, int)
         +mostrarMago()
         +modificarMago(int, String, int, int)
         +borrarMago(int)
+        +addHechizo(int, int)
     }
 
     class ControladorMonstruo{
-        -SessionFactory factory
+        -EntityManager em
         +addMonstruo(String, int, TipoMonstruo, int)
         +mostrarMonstruos()
         +modificarMonstruo(int, String, int, TipoMonstruo, int)
@@ -85,20 +105,34 @@ direction TB
     }
 
     class ControladorDragon{
-        -SessionFactory factory
+        -EntityManager em
         +addDragon(String, int, int)
         +mostrarDragones()
         +modificarDragon(int, String, int, int)
         +borrarDragon(int)
     }
 
-    class ControladorBosque{
-        -SessionFactory factory
-        +addBosque(String, int, int, int)
-        +addMonstruoBosque(int, int)
+    class ControladorBosque {
+        -EntityManager em
+        +ControladorBosque(em: EntityManager)
+        +addBosque(nombre: String, nivelPeligro: int, idMonstruoJefe: int, idDragon: int)
+        +addMonstruoBosque(idBosque: int, idMonstruo: int)
         +mostrarBosques()
-        +modificarBosque(int, String, int, int, int)
-        +borrarBosque(int)
+        +modificarBosque(id: int, nombre: String, nivelPeligro: int, idMonstruoJefe: int, idDragon: int)
+        +borrarBosque(id: int)
+    }
+
+    class ControladorHechizo {
+        -EntityManager em
+        +ControladorHechizo(em: EntityManager)
+        +addHechizo(hechizo: Hechizo)
+        +mostrarHechizos()
+    }
+
+    class ControladorJuego{
+        -EntityManager em
+        +limpiarConsola()
+        +jugar(int, int)
     }
 
     class Bosque {

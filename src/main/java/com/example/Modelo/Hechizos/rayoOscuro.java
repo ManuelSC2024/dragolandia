@@ -6,17 +6,14 @@ import com.example.Modelo.Monstruo;
 import jakarta.persistence.Entity;
 
 @Entity
-public class BolaNieve extends Hechizo {
+public class rayoOscuro extends Hechizo {
 
-    public BolaNieve() {
-        this.nombre = "Bola de nieve";
+    public rayoOscuro() {
+        this.nombre = "Rayo Oscuro";
     }
 
     @Override
     public void efecto(Monstruo monstruo) {
-        monstruo.setVida(0);
-        if (monstruo.getVida() < 0) {
-            monstruo.setVida(0);
-        }
+        monstruo.setVida(monstruo.getVida() - 100);
     }
 }

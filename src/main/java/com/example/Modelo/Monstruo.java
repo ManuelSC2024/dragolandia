@@ -99,5 +99,4 @@ public class Monstruo implements Serializable {
         System.out.println(
                 "El monstruo quito " + this.getFuerza() + " puntos de vida al mago: " + mago.getNombre());
     }
-
 }
