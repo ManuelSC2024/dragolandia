@@ -4,21 +4,42 @@ import java.util.Scanner;
 
 import com.example.Controlador.ControladorDragolandia;
 import com.example.Modelo.TipoMonstruo;
+import com.example.Modelo.Hechizos.BolaFuego;
+import com.example.Modelo.Hechizos.BolaNieve;
+import com.example.Modelo.Hechizos.Rayo;
 
 public class VistaDragolandia {
     ControladorDragolandia controlador = new ControladorDragolandia();
 
     public VistaDragolandia() {
 
+
+        Rayo rayo = new Rayo();
+        BolaFuego bFuego = new BolaFuego();
+        BolaNieve bNieve = new BolaNieve();
+
         controlador.addMago("Gandalf", 200, 20);
         controlador.addMago("Merlín", 125, 10);
+
+        controlador.addHechizo(rayo);
+        controlador.addHechizo(bFuego);
+        controlador.addHechizo(bNieve);
+
+        controlador.addHechizoMago(1, 1);
+        controlador.addHechizoMago(1, 2);
         
+        controlador.addHechizoMago(2, 2);
+        controlador.addHechizoMago(2, 3);
+
         controlador.addMonstruo("Ogro del Bosque", 250, TipoMonstruo.valueOf("OGRO"), 10);
         controlador.addMonstruo("Espectro", 250, TipoMonstruo.valueOf("ESPECTRO"), 10);
         controlador.addMonstruo("Ogro pequeño", 0, TipoMonstruo.valueOf("OGRO"), 0);
 
         controlador.addDragon("Dragon Rojo", 25, 300);
         controlador.addBosque("Bosque del Ogro", 10, 1, 1);
+        controlador.addMonstruoBosque(1, 2);
+        controlador.addMonstruoBosque(1, 3);
+
 
         System.out.println("=== Menu ===");
         System.out.println("Ingrese 1 para añadir un mago");
@@ -111,7 +132,19 @@ public class VistaDragolandia {
                     break;
 
                 case 5:
+                    System.out.println("Ingrese el id del hechizo que desea añadir al mago");
+                    System.out.println("Los conjuros disponibles son: ");
+                    controlador.mostrarHechizos();
                     
+                    System.out.print("id del hechizo: ");
+                    int idHechizo = Integer.parseInt(scanner.nextLine());
+
+                    System.out.println("Ingrese el id del Mago");
+                    System.out.println("Lista de magos disponibles:");
+                    controlador.mostrarMago();
+                    int idMago = Integer.parseInt(scanner.nextLine());
+
+                    controlador.addHechizoMago(idMago, idHechizo);
                     break;
 
                 case 6:
@@ -159,7 +192,7 @@ public class VistaDragolandia {
                                 break;
 
                             case 5:
-                                System.out.println("Sin Implementar");
+                                controlador.mostrarHechizos();
                                 break;
 
                             case 6:

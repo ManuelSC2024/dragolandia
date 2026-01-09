@@ -11,7 +11,7 @@ import jakarta.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Hechizo {
+public abstract class Hechizo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,5 +41,10 @@ public class Hechizo {
 
     public String getNombre() {
         return nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Hechizo [id=" + id + ", nombre=" + nombre + "]";
     }
 }

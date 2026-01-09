@@ -7,8 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "Magos")
@@ -22,7 +22,7 @@ public class Mago {
     private int vida;
     private int nivelMagia;
 
-    @Transient
+    @ManyToMany
     private List<Hechizo> conjuros = new ArrayList<>();
 
     public Mago() {
@@ -68,13 +68,9 @@ public class Mago {
 
     @Override
     public String toString() {
-        return "Mago [\n id=" + id
-                + ",\n nombre=" + nombre
-                + ",\n vida=" + vida
-                + ",\n nivelMagia="+ nivelMagia
-                + "\n]";
+        return "Mago [id=" + id + ", nombre=" + nombre + ", vida=" + vida + ", nivelMagia=" + nivelMagia + ", conjuros="
+                + conjuros + "]";
     }
-
 
       /**
      * Este metodo calcula el daño que causa el mago a un mostruo

@@ -47,6 +47,7 @@ public class ControladorMonstruo {
             for (Monstruo monstruo : lista) {
                 System.out.println(monstruo.toString());
             }
+            em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error al mostrar todos los Monstruos: " + e.getMessage());
         } 

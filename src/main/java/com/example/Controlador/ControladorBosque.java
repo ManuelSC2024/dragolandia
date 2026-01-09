@@ -19,10 +19,10 @@ public class ControladorBosque {
     /**
      * Metodo para crear un nuevo bosque y añadirlo a la base de datos
      * 
-     * @param nombre       Nombre del boque
-     * @param nivelPeligro Nivel de peligro del bosque
+     * @param nombre         Nombre del boque
+     * @param nivelPeligro   Nivel de peligro del bosque
      * @param idMonstruoJefe Id del monstruo jefe del bosque
-     * @param idDragon     Id del dragon del bosque
+     * @param idDragon       Id del dragon del bosque
      */
     public void addBosque(String nombre, int nivelPeligro, int idMonstruoJefe, int idDragon) {
         try {
@@ -38,7 +38,7 @@ public class ControladorBosque {
             System.out.println("Se añadio el bosque correctamente");
         } catch (Exception e) {
             System.out.println("Error al añadir un bosque: " + e.getMessage());
-        } 
+        }
     }
 
     /**
@@ -76,9 +76,12 @@ public class ControladorBosque {
             for (Bosque Bosque : lista) {
                 System.out.println(Bosque.toString());
             }
+            System.out.println();
+
+            em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error al mostrar todos los Bosques: " + e.getMessage());
-        } 
+        }
     }
 
     /**
@@ -92,13 +95,13 @@ public class ControladorBosque {
             if (bosque != null) {
                 bosque.setNombre(nombre);
                 bosque.setNivelPeligro(nivelPeligro);
-                
+
                 Monstruo jefe = em.find(Monstruo.class, idMonstruoJefe);
                 Dragon dragon = em.find(Dragon.class, idDragon);
-               
+
                 bosque.setMonstruoJefe(jefe);
                 bosque.setDragon(dragon);
-               
+
                 em.merge(bosque);
                 em.getTransaction().commit();
                 System.out.println("Se modificó correctamente el bosque con id: " + id);
@@ -107,7 +110,7 @@ public class ControladorBosque {
             }
         } catch (Exception e) {
             System.out.println("Error al modificar un Bosque: " + e.getMessage());
-        } 
+        }
     }
 
     /**
@@ -127,6 +130,6 @@ public class ControladorBosque {
             }
         } catch (Exception e) {
             System.out.println("Error al eliminar un Bosque: " + e.getMessage());
-        } 
+        }
     }
 }

@@ -45,6 +45,9 @@ public class ControladorDragon {
             for (Dragon dragon : lista) {
                 System.out.println(dragon.toString());
             }
+            System.out.println();
+
+            em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error al mostrar todos los Dragones: " + e.getMessage());
         }

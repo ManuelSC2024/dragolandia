@@ -5,6 +5,9 @@ import java.util.List;
 import com.example.Modelo.Hechizo;
 import com.example.Modelo.Monstruo;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class BolaFuego extends Hechizo{
 
     public BolaFuego(){
@@ -23,4 +26,5 @@ public class BolaFuego extends Hechizo{
             monstruo.setVida(Math.max(0, monstruo.getVida() - d));
         }
     }
+
 }

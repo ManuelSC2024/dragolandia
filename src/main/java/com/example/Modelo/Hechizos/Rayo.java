@@ -3,8 +3,11 @@ package com.example.Modelo.Hechizos;
 import com.example.Modelo.Hechizo;
 import com.example.Modelo.Monstruo;
 
-public class Rayo extends Hechizo{
+import jakarta.persistence.Entity;
 
+@Entity
+public class Rayo extends Hechizo{
+    
     public Rayo(){
         this.nombre = "Rayo";
     }

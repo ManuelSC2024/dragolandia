@@ -1,6 +1,7 @@
 package com.example.Controlador;
 
 
+import com.example.Modelo.Hechizo;
 import com.example.Modelo.TipoMonstruo;
 import com.example.Util.HibernateUtil;
 
@@ -16,6 +17,8 @@ public class ControladorDragolandia {
     private ControladorMonstruo controladorMonstruo = new ControladorMonstruo(entityManager);
     private ControladorDragon controladorDragon = new ControladorDragon(entityManager);
     private ControladorBosque controladorBosque = new ControladorBosque(entityManager);
+    private ControladorHechizo controladorHechizo = new ControladorHechizo(entityManager);
+    private ControladorJuego controladorJuego = new ControladorJuego(entityManager);
 
     // Añadir Entidades
     /**
@@ -23,6 +26,23 @@ public class ControladorDragolandia {
      */
     public void addMago(String nombre, int vida, int nivelMagia) {
         controladorMago.addMago(nombre, vida, nivelMagia);
+    }
+
+    /**
+     * 
+     * @param hechizo
+     */
+    public void addHechizo(Hechizo hechizo){
+        controladorHechizo.addHechizo(hechizo);
+    }
+
+    /**
+     * Delega el añadir un hechizo al mago al ControladorMago
+     * @param idMago Id del mago
+     * @param idHechizo id del hechizo
+     */
+    public void addHechizoMago(int idMago, int idHechizo){
+        controladorMago.addHechizo(idMago, idHechizo);
     }
 
     /**
@@ -56,11 +76,19 @@ public class ControladorDragolandia {
 
 
     // Mostrar Entidades
+    
     /**
      * Delega mostrar magos al ControladorMago
      */
     public void mostrarMago() {
         controladorMago.mostrarMago();
+    }
+
+    /**
+     * Delega mostrar hechizos al ControladorHechizos
+     */
+    public void mostrarHechizos(){
+        controladorHechizo.mostrarHechizos();
     }
 
     /**
@@ -83,6 +111,7 @@ public class ControladorDragolandia {
     public void mostrarBosques() {
         controladorBosque.mostrarBosques();
     }
+
 
     // Modificar Entidades
     public void modificarMago(int id, String nombre, int vida, int nivelMagia) {
@@ -137,8 +166,12 @@ public class ControladorDragolandia {
         controladorBosque.borrarBosque(id);
     }
 
-    //Jugar
+    /**
+     * Empieza el juego con el mago selecionado y el bosque
+     * @param idMagoJuego Id del mago
+     * @param idBosqueJuego Id del bosque
+     */    
     public void jugar(int idMagoJuego, int idBosqueJuego){
-        System.out.println("Sin implementar");
+        controladorJuego.jugar(idMagoJuego, idBosqueJuego);
     }
 }

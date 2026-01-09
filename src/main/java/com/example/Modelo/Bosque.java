@@ -89,20 +89,17 @@ public class Bosque {
         this.dragon = dragon;
     }
 
-    @Override
-    public String toString() {
-        return "Bosque [\n id=" + id
-                + ",\n nombre=" + nombre
-                + ",\n nivelPeligro=" + nivelPeligro
-                + ",\n monstruoJefe=" + monstruoJefe
-                + "\n]";
-    }
-
     /**
      * Mostra el mosntruo jefe.
      */
     public void mostrarJefe() {
         System.err.println(this.monstruoJefe.toString());
+    }
+
+    @Override
+    public String toString() {
+        return "Bosque [id=" + id + ", nombre=" + nombre + ", nivelPeligro=" + nivelPeligro + ", monstruoJefe="
+                + monstruoJefe + ", monstruosEnBosque=" + monstruosEnBosque + ", dragon=" + dragon + "]";
     }
 
     /**

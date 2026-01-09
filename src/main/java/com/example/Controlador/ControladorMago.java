@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.example.Modelo.Hechizo;
 import com.example.Modelo.Mago;
-import com.example.Modelo.Hechizos.Rayo;
 
 import jakarta.persistence.EntityManager;
 
@@ -49,6 +48,9 @@ public class ControladorMago {
             for (Mago mago : lista) {
                 System.out.println(mago.toString());
             }
+            System.out.println();
+
+            em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error al mostrar todos los Magos: " + e.getMessage());
         } 
@@ -99,21 +101,23 @@ public class ControladorMago {
         }
     }
 
-    public void addHechizo(int id, String nombreHechizo){
+    /**
+     * Añade un hechizo al mago
+     * @param idmago Id del mago
+     * @param idHechizo Id del hechizo
+     */
+    public void addHechizo(int idmago, int idHechizo){
         try{
             em.getTransaction().begin();
-            Mago mago = em.find(Mago.class, 1);
-            switch (nombreHechizo) {
-                case "Rayo":
-                    Rayo rayo = new Rayo();
-                    mago.addconjuro(rayo);
-                    break;
-            
-                default:
-                    break;
-            }
+           
+            Mago mago = em.find(Mago.class, idmago);
+            Hechizo hechizo = em.find(Hechizo.class, idHechizo);
+            mago.addconjuro(hechizo);
+
+            em.merge(mago);
+            em.getTransaction().commit();
         } catch (Exception e) {
-            // TODO: handle exception
+            System.out.println("No se pudo añadir el hechizo al mago: " + e.getMessage());    
         }
     }
 }
