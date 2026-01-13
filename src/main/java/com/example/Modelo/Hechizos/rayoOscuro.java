@@ -6,9 +6,9 @@ import com.example.Modelo.Monstruo;
 import jakarta.persistence.Entity;
 
 @Entity
-public class rayoOscuro extends Hechizo {
+public class RayoOscuro extends Hechizo {
 
-    public rayoOscuro() {
+    public RayoOscuro() {
         this.nombre = "Rayo Oscuro";
     }
 

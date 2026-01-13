@@ -15,22 +15,6 @@ public class ControladorJuego {
     }
 
     /**
-     * Codigo para limpiar la consola (sacado de stacOverflow) y 
-     * adaptado para que funcione en linux con algo de ayuda de chatGPT
-     */
-    public void limpiarConsola() {
-        try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                new ProcessBuilder("clear").inheritIO().start().waitFor();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Juegar ejecuta la logica interna del juego, mago ataca al monstruo, al derotarlo se enfrenta al jefe, donde puede que intervega el dragon
      * @param idMago Id Mago
      * @param idBosque Id Bosque
@@ -48,7 +32,6 @@ public class ControladorJuego {
         Dragon dragon = bosque.getDragon();
         int turno = 1;
         
-        limpiarConsola();
         while (mago.getVida() > 0 && monstruo.getVida() > 0) {
 
             System.out.println("=== Turno " + turno + " ===");

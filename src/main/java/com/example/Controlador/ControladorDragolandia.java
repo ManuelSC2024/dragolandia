@@ -9,9 +9,7 @@ import jakarta.persistence.EntityManager;
 
 public class ControladorDragolandia {
 
-    
     private static EntityManager entityManager = HibernateUtil.getEntityManager();
-
 
     private ControladorMago controladorMago = new ControladorMago(entityManager);
     private ControladorMonstruo controladorMonstruo = new ControladorMonstruo(entityManager);

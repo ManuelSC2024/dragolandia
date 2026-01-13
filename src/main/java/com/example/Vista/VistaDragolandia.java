@@ -7,16 +7,17 @@ import com.example.Modelo.TipoMonstruo;
 import com.example.Modelo.Hechizos.BolaFuego;
 import com.example.Modelo.Hechizos.BolaNieve;
 import com.example.Modelo.Hechizos.Rayo;
+import com.example.Modelo.Hechizos.RayoOscuro;
 
 public class VistaDragolandia {
     ControladorDragolandia controlador = new ControladorDragolandia();
 
     public VistaDragolandia() {
 
-
         Rayo rayo = new Rayo();
         BolaFuego bFuego = new BolaFuego();
         BolaNieve bNieve = new BolaNieve();
+        RayoOscuro rOscuro = new RayoOscuro();
 
         controlador.addMago("Gandalf", 200, 20);
         controlador.addMago("Merlín", 125, 10);
@@ -24,6 +25,7 @@ public class VistaDragolandia {
         controlador.addHechizo(rayo);
         controlador.addHechizo(bFuego);
         controlador.addHechizo(bNieve);
+        controlador.addHechizo(rOscuro);
 
         controlador.addHechizoMago(1, 1);
         controlador.addHechizoMago(1, 2);
@@ -33,7 +35,7 @@ public class VistaDragolandia {
 
         controlador.addMonstruo("Ogro del Bosque", 250, TipoMonstruo.valueOf("OGRO"), 10);
         controlador.addMonstruo("Espectro", 250, TipoMonstruo.valueOf("ESPECTRO"), 10);
-        controlador.addMonstruo("Troll", 0, TipoMonstruo.valueOf("TROLL"), 0);
+        controlador.addMonstruo("Troll", 50, TipoMonstruo.valueOf("TROLL"), 5);
 
         controlador.addDragon("Dragon Rojo", 25, 300);
         controlador.addBosque("Bosque del Ogro", 10, 1, 1);
