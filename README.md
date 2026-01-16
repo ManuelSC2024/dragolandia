@@ -1,4 +1,6 @@
 # Dragolandia
+[Link del pdf de las tablas](./Dragolandia.pdf)
+
 
 ## Introduccion
 Este esta es una aplicacion que permite añadir magos, dragones y monstruos para que combatan en un bosque
