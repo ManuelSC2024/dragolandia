@@ -14,7 +14,7 @@ A los bosques puedes darle nombre, escoger el mostruo jefe del bosque, seleccion
 Puedes ver, modificar y eliminar las entidades
 Al jugar selecionas un mago y un bosque donde combatiras contra un monstruo y luego contra el jefe donde el dragon puede aparecer a ayudar.
 
-### Manual
+### Manual de usuario
 [Manual de Dragolandia](./Manual.md)
 
 #### Estructura de tablas
